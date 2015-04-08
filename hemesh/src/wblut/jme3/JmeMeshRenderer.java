@@ -2,9 +2,12 @@ package wblut.jme3;
 
 import java.util.Stack;
 import processing.core.PImage;
+import com.jme3.app.Application;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
+import com.jme3.math.Vector3f;
+import com.jme3.scene.Mesh.Mode;
 
 public class JmeMeshRenderer {
     
@@ -13,24 +16,35 @@ public class JmeMeshRenderer {
     Transform matrix;
     Transform newMatrix;
     
-    ProMesh faces;
-    ProMesh edges;
-    ProMesh poly;
-    ProMesh segment;
-    ProMesh points;
+    public ProMesh faces;
+    public ProMesh edges;
+    public ProMesh polyline;
+    public ProMesh segment;
+    public ProMesh points;
 
     ColorRGBA fill, stroke;
     
     Stack<ColorRGBA> styles;
     
-    public JmeMeshRenderer() {
+    Application app;
+    
+    public JmeMeshRenderer(Application app) {
+	this.app = app;
+	
+	faces = new ProMesh(1000000, Mode.Triangles);
+	edges = new ProMesh(1000000, Mode.LineLoop);
+	polyline = new ProMesh(1000000, Mode.Lines);
+	segment = new ProMesh(1000000, Mode.Lines);
+	points = new ProMesh(1000000, Mode.LineLoop);
+	
 	matrices = new Stack<Transform>();
 	styles = new Stack<ColorRGBA>();
 	fill = new ColorRGBA();
 	stroke = new ColorRGBA();
     }
     
-    public void point(final float x, final float y, final float z) {
+    public void point(float x, float y, float z) {
+	points.addVertex(x, y, z);
     }
 
     public void pushMatrix() {
@@ -58,12 +72,14 @@ public class JmeMeshRenderer {
     }
 
     // 2d line
-    public void line(float x, float y, float x2, float y2) {
-	//points.a
+    public void line(float x1, float y1, float x2, float y2) {
+	points.addVertex(x1, y1, 0);
+	points.addVertex(x2, y2, 0);
     }
 
-    public void line(float x, float y, float z, float xx, float yy, float zz) {
-
+    public void line(float x1, float y1, float z1, float x2, float y2, float z2) {
+	points.addVertex(x1, y1, z1);
+	points.addVertex(x2, y2, z2);
     }
 
     public void rotate(final float x, final float y, final float z) {
@@ -95,12 +111,13 @@ public class JmeMeshRenderer {
 	// TODO Auto-generated method stub
     }
 
-    public void vertex(final float f, final float g, final float h) {
-	// TODO Auto-generated method stub
+    public void vertex(float x, float y, float z) {
+	points.addVertex(x, y, z);
     }
 
     public void vertex(float x, float y, float z, float u, float v) {
-	// TODO Auto-generated method stub
+	points.addVertex(x, y, z);
+	points.addUv(u, v);
     }
 
     public void normal(float x, float y, float z) {
@@ -125,18 +142,16 @@ public class JmeMeshRenderer {
 	fill = styles.pop();
     }
 
-    public void vertex(final float xf, final float yf) {
-	// TODO Auto-generated method stub
+    public void vertex(float x, float y) {
+	points.addVertex(x, y, 0);
     }
 
-    public double screenX(final float xf, final float yf, final float zf) {
-	// TODO Auto-generated method stub
-	return 0;
+    public double screenX(float x, float y, float z) {
+	return app.getCamera().getScreenCoordinates(new Vector3f(x, y, z)).x;
     }
 
-    public double screenY(final float xf, final float yf, final float zf) {
-	// TODO Auto-generated method stub
-	return 0;
+    public double screenY(float x, float y, float z) {
+	return app.getCamera().getScreenCoordinates(new Vector3f(x, y, z)).y;
     }
 
     public void stroke(int r, int g, int b) {
@@ -144,8 +159,7 @@ public class JmeMeshRenderer {
     }
 
     public int getHeight() {
-	// TODO Auto-generated method stub
-	return 0;
+	return app.getCamera().getHeight();
     }
 
     public void bezierVertex(final float xf, final float yf, final float zf,

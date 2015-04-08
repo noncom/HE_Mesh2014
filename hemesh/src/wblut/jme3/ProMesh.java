@@ -37,16 +37,26 @@ public class ProMesh {
 	uvs.rewind();
 //	indices.rewind();
 	
+	System.out.println("v cap =" + vertices.capacity() + " lim =" + vertices.limit());
+	
 	final FloatBuffer resVectices = BufferUtils.createFloatBuffer(vertices.limit());
 	final FloatBuffer resNormals = BufferUtils.createFloatBuffer(normals.limit());
 	final FloatBuffer resUvs = BufferUtils.createFloatBuffer(uvs.limit());
 //	final IntBuffer resIndices = BufferUtils.createIntBuffer(indices.limit());
 	
 	mesh.setBuffer(Type.Position, 3, resVectices.put(vertices));
-	mesh.setBuffer(Type.Normal, 3, resNormals.put(normals));
-	mesh.setBuffer(Type.TexCoord, 3, resUvs.put(uvs));
-//	mesh.setBuffer(Type.Index, 3, resIndices.put(indices));
+//	mesh.setBuffer(Type.Normal, 3, resNormals.put(normals));
+//	mesh.setBuffer(Type.TexCoord, 3, resUvs.put(uvs));
 	
+//	String o = "";
+//	for(int i = 0; i < vertices.capacity(); i++) {
+//	    o += ", " + vertices.get();
+//	}
+//	vertices.rewind();
+//	System.out.println("vertices = " + o);
+	
+//	mesh.setBuffer(Type.Index, 3, resIndices.put(indices));
+	mesh.setMode(mode);
 	return mesh;
     }
     

@@ -65,7 +65,7 @@ public class WB_RenderJME {
 	    .instance();
 
     public WB_RenderJME(final JmeMeshRenderer renderer) {
-	this.home = home;
+	this.home = renderer;
     }
 
     public void drawPoint(final WB_Coordinate p) {
@@ -838,6 +838,7 @@ public class WB_RenderJME {
     public void drawFace(final HE_Face f, final boolean smooth) {
 	final int fo = f.getFaceOrder();
 	final List<HE_Vertex> vertices = f.getFaceVertices();
+//	System.out.println("R-JME: fo =" + fo);
 	if ((fo < 3) || (vertices.size() < 3)) {
 	} else if (fo == 3) {
 	    final int[] tri = new int[] { 0, 1, 2 };
@@ -1264,7 +1265,9 @@ public class WB_RenderJME {
      */
     public void drawFaces(final HE_MeshStructure mesh) {
 	final Iterator<HE_Face> fItr = mesh.fItr();
+//	System.out.println("R_JME drawFaces [A] =" + fItr.hasNext());
 	while (fItr.hasNext()) {
+//	    System.out.println("R_JME drawFaces [B] =" + fItr.hasNext());
 	    drawFace(fItr.next());
 	}
     }
