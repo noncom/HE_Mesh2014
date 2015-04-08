@@ -15,11 +15,32 @@
 		</repository>
 	</distributionManagement>
 
+	<repositories>
+		<repository>
+			<id>jme-maven</id>
+			<name>JMonkeyEngine Maven hosting</name>
+			<url>http://updates.jmonkeyengine.org/maven</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
+
+		<dependency>
+			<groupId>com.jme3</groupId>
+			<artifactId>jme3-core</artifactId>
+			<version>3.0.10</version>
+		</dependency>
+
 		<dependency>
 			<groupId>colorlib</groupId>
 			<artifactId>colorlib</artifactId>
 			<version>2.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>quil</groupId>
+			<artifactId>processing-core</artifactId>
+			<version>2.2.1</version>
 		</dependency>
 
 		<dependency>
@@ -40,17 +61,17 @@
 			<version>6.0.0</version>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>gov.nist.math</groupId> -->
-<!-- 			<artifactId>jama</artifactId> -->
-<!-- 			<version>1.0.3</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>gov.nist.math</groupId> -->
+		<!-- <artifactId>jama</artifactId> -->
+		<!-- <version>1.0.3</version> -->
+		<!-- </dependency> -->
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.github.quickhull3d</groupId> -->
-<!-- 			<artifactId>quickhull3d</artifactId> -->
-<!-- 			<version>1.0.0</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.github.quickhull3d</groupId> -->
+		<!-- <artifactId>quickhull3d</artifactId> -->
+		<!-- <version>1.0.0</version> -->
+		<!-- </dependency> -->
 
 
 	</dependencies>
