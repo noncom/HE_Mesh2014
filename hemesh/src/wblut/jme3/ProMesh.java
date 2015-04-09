@@ -45,8 +45,8 @@ public class ProMesh {
 //	final IntBuffer resIndices = BufferUtils.createIntBuffer(indices.limit());
 	
 	mesh.setBuffer(Type.Position, 3, resVectices.put(vertices));
-//	mesh.setBuffer(Type.Normal, 3, resNormals.put(normals));
-//	mesh.setBuffer(Type.TexCoord, 3, resUvs.put(uvs));
+	mesh.setBuffer(Type.Normal, 3, resNormals.put(normals));
+	mesh.setBuffer(Type.TexCoord, 2, resUvs.put(uvs));
 	
 //	String o = "";
 //	for(int i = 0; i < vertices.capacity(); i++) {

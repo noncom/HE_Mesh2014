@@ -121,7 +121,7 @@ public class JmeMeshRenderer {
     }
 
     public void normal(float x, float y, float z) {
-	// TODO Auto-generated method stub
+	points.addNormal(x, y, z);
     }
 
     public void fill(final int color) {
