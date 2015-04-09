@@ -5,8 +5,8 @@ HE_Mesh 2014, a Java library for creating and manipulating polygonal meshes. Aim
 
 ## About this fork !!!
 
-1. I am to add a possibility to use Hemesh to build JMonkeyEngine3 meshes. The current plan is to add the `WB_Render_JME3` class that can be used instead of the default `WB_Render3D`.
-2. I am to mavenize this repo.
+1. Added the `WB_RenderJME` class that can be used instead of the default `WB_Render3D`. The renderer class is accompanied by a couple of helper classes, which are still under construction and are a subject for change. However, building a simple polygonal JME3 mesh is already possible.
+2. The repo is fully mavenized, the library is avilalbe from clojars https://clojars.org/hemesh.
 3. Any significant progress on this work will be reported in this very section.
 4. Upon completion of tasks 1 and 2 I am to make a pull request.
 
