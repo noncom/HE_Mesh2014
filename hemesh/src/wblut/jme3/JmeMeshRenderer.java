@@ -31,16 +31,20 @@ public class JmeMeshRenderer {
     public JmeMeshRenderer(Application app) {
 	this.app = app;
 	
-	faces = new ProMesh(1000000, Mode.Triangles);
-	edges = new ProMesh(1000000, Mode.LineLoop);
-	polyline = new ProMesh(1000000, Mode.Lines);
-	segment = new ProMesh(1000000, Mode.Lines);
-	points = new ProMesh(1000000, Mode.LineLoop);
-	
 	matrices = new Stack<Transform>();
 	styles = new Stack<ColorRGBA>();
 	fill = new ColorRGBA();
 	stroke = new ColorRGBA();
+    }
+    
+    public void initBuffers(int count) {
+	System.out.println("WB_RendererJME: init to count " + count);
+	count = (count / 2) * 3; // <<<< WHY this is the exact number of required floats?
+	faces = new ProMesh(count, Mode.Triangles);
+	edges = new ProMesh(count, Mode.LineLoop);
+	polyline = new ProMesh(count, Mode.Lines);
+	segment = new ProMesh(count, Mode.Lines);
+	points = new ProMesh(count, Mode.LineLoop);
     }
     
     public void point(float x, float y, float z) {

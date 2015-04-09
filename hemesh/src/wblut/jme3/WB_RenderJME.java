@@ -68,6 +68,14 @@ public class WB_RenderJME {
 	this.home = renderer;
     }
 
+    public void initHomeBuffers(HE_MeshStructure mesh) {
+	int c = 0;
+	for(int i = 0; i < mesh.faces.size(); i++) {
+	    c += mesh.faces.get(i).getFaceVertices().size();
+	}
+	home.initBuffers(c);
+    }
+    
     public void drawPoint(final WB_Coordinate p) {
 	home.point(p.xf(), p.yf(), p.zf());
     }
@@ -1254,6 +1262,7 @@ public class WB_RenderJME {
     }
 
     public void drawFaces(final Collection<? extends HE_MeshStructure> meshes) {
+	// TODO: make smart init buffers here for the size
 	final Iterator<? extends HE_MeshStructure> mItr = meshes.iterator();
 	while (mItr.hasNext()) {
 	    drawFaces(mItr.next());
@@ -1264,15 +1273,15 @@ public class WB_RenderJME {
      * Draw mesh faces. Typically used with noStroke();
      */
     public void drawFaces(final HE_MeshStructure mesh) {
+	initHomeBuffers(mesh);
 	final Iterator<HE_Face> fItr = mesh.fItr();
-//	System.out.println("R_JME drawFaces [A] =" + fItr.hasNext());
 	while (fItr.hasNext()) {
-//	    System.out.println("R_JME drawFaces [B] =" + fItr.hasNext());
 	    drawFace(fItr.next());
 	}
     }
 
     public void drawFaces(final HE_MeshStructure mesh, final PImage texture) {
+	initHomeBuffers(mesh);
 	final Iterator<HE_Face> fItr = mesh.fItr();
 	while (fItr.hasNext()) {
 	    drawFace(fItr.next(), texture);
@@ -1280,6 +1289,7 @@ public class WB_RenderJME {
     }
 
     public void drawFaces(final HE_MeshStructure mesh, final PImage[] textures) {
+	initHomeBuffers(mesh);
 	final Iterator<HE_Face> fItr = mesh.fItr();
 	while (fItr.hasNext()) {
 	    drawFace(fItr.next(), textures);

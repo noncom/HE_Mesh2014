@@ -32,9 +32,11 @@ public class ProMesh {
     public Mesh mesh() {
 	final Mesh mesh = new Mesh();
 	
-	vertices.rewind();
-	normals.rewind();
-	uvs.rewind();
+	System.out.println("v pos1 =" + vertices.position() + " pos2 =" + normals.position());
+	
+	vertices.flip();
+	normals.flip();
+	uvs.flip();
 //	indices.rewind();
 	
 	System.out.println("v cap =" + vertices.capacity() + " lim =" + vertices.limit());
@@ -44,10 +46,14 @@ public class ProMesh {
 	final FloatBuffer resUvs = BufferUtils.createFloatBuffer(uvs.limit());
 //	final IntBuffer resIndices = BufferUtils.createIntBuffer(indices.limit());
 	
-	mesh.setBuffer(Type.Position, 3, resVectices.put(vertices));
-	mesh.setBuffer(Type.Normal, 3, resNormals.put(normals));
-	mesh.setBuffer(Type.TexCoord, 2, resUvs.put(uvs));
+	System.out.println("A[]");
 	
+	mesh.setBuffer(Type.Position, 3, resVectices.put(vertices));
+	System.out.println("B[]");
+//	if(normals.capacity() > 0) mesh.setBuffer(Type.Normal, 3, resNormals.put(normals));
+	System.out.println("C[]");
+	mesh.setBuffer(Type.TexCoord, 2, resUvs.put(uvs));
+	System.out.println("D[]");
 //	String o = "";
 //	for(int i = 0; i < vertices.capacity(); i++) {
 //	    o += ", " + vertices.get();
